@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TableWithURLViewController.h"
 
-@interface FirstViewController : UIViewController
-
+@interface FirstScreenViewController : UIViewController
+{
+    UIImageView *font;
+    UIButton *button;
+}
+@property (nonatomic,retain)UIImageView *font;
+@property(nonatomic,retain) UIButton *button;
 @end

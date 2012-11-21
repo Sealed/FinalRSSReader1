@@ -7,7 +7,12 @@
 //
 
 #import "CData.h"
-
+@interface CData()
+@end
 @implementation CData
+
+@synthesize data;
+@synthesize dataURL;
+
 
 @end

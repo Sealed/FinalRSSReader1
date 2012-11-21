@@ -6,38 +6,42 @@
 //  Copyright (c) 2012 Vadim Glushko. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "FirstScreenViewController.h"
 
-@interface FirstViewController ()
+@interface FirstScreenViewController ()
 
 @end
 
-@implementation FirstViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation FirstScreenViewController
+@synthesize font;
+@synthesize button;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.navigationController.navigationBarHidden = YES;
+    font = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    font.image = [UIImage imageNamed:@"mobiles.jpg"];
+    [self.view addSubview:font];    
+    button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(30, 320, 260,40);
+    button.backgroundColor = [UIColor blackColor];
+    [button setTitle:@"Click ME!!!" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(tuchdown) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];    
 }
 
-- (void)didReceiveMemoryWarning
+-(void)tuchdown
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.navigationController.navigationBarHidden = NO;
+    TableWithURLViewController *root = [[TableWithURLViewController new]autorelease];
+    [self.navigationController pushViewController:root animated:YES];    
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(void)dealloc
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [font release];
+    [button release];
+    [super dealloc];
 }
-
 @end

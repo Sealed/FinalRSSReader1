@@ -10,7 +10,7 @@
 
 @implementation CBrowser
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame url:(NSString *)url;
 {
     self = [super initWithFrame:frame];
     if (self) {

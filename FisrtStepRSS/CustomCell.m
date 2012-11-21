@@ -14,15 +14,25 @@
 @synthesize descriprion;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+{    
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    title = [[UILabel alloc]initWithFrame:CGRectMake(0,0, 400, 15)];
-    pubData = [[UILabel alloc]initWithFrame:CGRectMake(0, 18, 400, 15)];
-    descriprion =[[UILabel alloc]initWithFrame:CGRectMake(0, 35, 400, 50)];
+    UIFont *titlefont = [UIFont fontWithName:@"Georgia-Bold" size:23];
+    UIFont *pubdatafont = [UIFont fontWithName:@"Georgia-Italic" size:10];
+    UIFont *descriptionfont = [UIFont fontWithName:@"Georgia" size:15];
+    title = [[UILabel alloc]initWithFrame:CGRectMake(0,0, 330, 25)];
+    title.font = titlefont;
+    pubData = [[UILabel alloc]initWithFrame:CGRectMake(0, 27, 330, 15)];
+    pubData.font = pubdatafont;
+    descriprion =[[UILabel alloc]initWithFrame:CGRectMake(0, 45, 330, 50)];
+    descriprion.textAlignment = NSTextAlignmentLeft;
+    descriprion.numberOfLines = 3;
+    descriprion.font = descriptionfont;
+    
     [self addSubview:title];
     [self addSubview:pubData];
     [self addSubview:descriprion];
     return self;
 }
+
 
 @end

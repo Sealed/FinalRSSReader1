@@ -7,7 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol MyProtocolDownloader<NSObject>
+@optional
+- (void)start;
+@end
 
-@interface CDownloader : UIView
+
+@interface CDownloader : NSObject
+{    
+    id<MyProtocolDownloader>delegate;
+    NSMutableData *rssData;
+    NSURL *url;
+    NSURLRequest *theRequest;
+    NSURLConnection *theConnection;
+}
+@property (nonatomic,retain) NSURLConnection *theConnection;
+@property (nonatomic,retain) NSURLRequest *theRequest;
+@property (nonatomic, retain) NSURL *url;
+@property (nonatomic, retain) NSMutableData *rssData;
+@property (nonatomic, assign)id <MyProtocolDownloader> delegate;
+
+-(id)initwithurl:(NSString *)TextURL;
 
 @end

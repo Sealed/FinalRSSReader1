@@ -24,7 +24,7 @@
 @property (nonatomic,retain)CTablewithRSSData *data;
 @property (nonatomic, retain)CustomCell *cell;
 
-- (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style title:(NSMutableArray *)title pubdate:(NSMutableArray *)pubdate url:(NSMutableArray *)url description:(NSMutableArray *)descriprion;
+- (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style title:(NSMutableArray *)title pubdate:(NSMutableArray *)pubdate url:(NSMutableArray *)url description:(NSMutableArray *)description;
 
 
 

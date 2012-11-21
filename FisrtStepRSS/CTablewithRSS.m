@@ -13,14 +13,14 @@
 @synthesize delegat;
 @synthesize cell;
 
-- (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style title:(NSMutableArray *)title pubdate:(NSMutableArray *)pubdate url:(NSMutableArray *)url description:(NSMutableArray *)descriprion
+- (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style title:(NSMutableArray *)title pubdate:(NSMutableArray *)pubdate url:(NSMutableArray *)url description:(NSMutableArray *)description
 {
     self = [super initWithFrame:frame style:style];
     data = [[CTablewithRSSData alloc] init];
     data.url = [NSMutableArray arrayWithArray:url];
     data.title = [NSMutableArray arrayWithArray:title];
     data.pubData = [NSMutableArray arrayWithArray:pubdate];
-    data.description = [NSMutableArray arrayWithArray:descriprion];
+    data.description = [NSMutableArray arrayWithArray:description];
     self.delegate = self;
     self.dataSource = self;
     return self;
@@ -59,7 +59,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

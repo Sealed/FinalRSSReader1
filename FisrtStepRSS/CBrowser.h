@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CBrowser : UIWebView
-
+{
+    
+}
+- (id)initWithFrame:(CGRect)frame url:(NSString *)url;
 @end

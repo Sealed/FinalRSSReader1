@@ -9,5 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface CData : NSObject
+{    
+    NSMutableArray *data;
+    NSMutableArray *dataURL;   
+}
+@property (nonatomic, retain) NSMutableArray *data;
+@property (nonatomic, retain) NSMutableArray *dataURL;
+
+
+
 
 @end

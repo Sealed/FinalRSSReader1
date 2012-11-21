@@ -6,38 +6,56 @@
 //  Copyright (c) 2012 Vadim Glushko. All rights reserved.
 //
 
-#import "RootViewController2.h"
+#import "MainViewController.h"
 
-@interface RootViewController2 ()
+@interface MainViewController ()
 
 @end
 
-@implementation RootViewController2
+@implementation MainViewController
+@synthesize tableView;
+@synthesize parser;
+@synthesize TextURL;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initwithurl:(NSString*)CurrentUrl
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+self = [super init];
+self.TextURL = [NSString stringWithString:CurrentUrl];
+return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [super viewDidLoad];    
+    parser = [[CParser alloc] initwithurl:TextURL];
+    parser.delegate = self;
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)finishParser
+{    
+    tableView = [[CTablewithRSS alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain title:parser.parData.feedTitle pubdate:parser.parData.feedPubDate url:parser.parData.feedURL description:parser.parData.feedDescription];
+    tableView.delegat = self;    
+    [self.view addSubview:tableView];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(void)InBrowser:(NSIndexPath *)indexPath
+{    
+    NSString *currenturl = [NSString string];
+    NSString *currenttitle = [NSString string];
+    currenturl = [self.tableView.data.url objectAtIndex:indexPath.row];
+    currenttitle = [self.tableView.data.title objectAtIndex:indexPath.row];                    
+    BrowserViewController *second = [[BrowserViewController alloc] initwithurl:currenturl title:currenttitle];
+    [self.navigationController pushViewController:second animated:YES];
+    [currenturl release];
+    
+}
+
+-(void)dealloc
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [tableView release];
+    [parser release];
+    [super dealloc];
 }
 
 @end

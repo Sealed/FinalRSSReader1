@@ -13,31 +13,40 @@
 @end
 
 @implementation TableWithURLViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize edit;
+@synthesize add;
+@synthesize tableview;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    edit =[[[UIBarButtonItem alloc] 
+                             initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                             target:self
+                             action:@selector(editing)] autorelease];
+    self.navigationItem.RightBarButtonItem = edit;
+    add = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addelem)] autorelease];
+    self.navigationItem.leftBarButtonItem = add;
+    tableview = [[CTable alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tableview.delegat = self;
+    [self.view addSubview:tableview];
 	// Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+-(void)editing
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [tableview editing];
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(void)addelem
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [tableview addelem];
+}
+- (void)InMainView:(NSIndexPath *)indexPath
+{
+    NSString *currentURL = [NSString string];
+    currentURL = [tableview.data.dataURL objectAtIndex:indexPath.row];
+    MainViewController *gotomain = [[[MainViewController alloc]initwithurl:currentURL ]autorelease];
+    [self.navigationController pushViewController:gotomain animated:YES];
 }
 
 @end

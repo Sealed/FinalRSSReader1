@@ -7,7 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CParser.h"
+#import "BrowserViewController.h"
+#import "CTablewithRSS.h"
 
-@interface RootViewController2 : UIViewController
+
+@interface MainViewController : UIViewController <MyProtocolParser,MyProtocolTable,UITableViewDelegate, UITableViewDataSource>
+{
+    CTablewithRSS *tableView;
+    CParser *parser;
+    NSString *TextURL;
+    
+}
+@property(nonatomic,retain)NSString *TextURL;
+@property(nonatomic, retain)CParser *parser;
+@property(nonatomic, retain) CTablewithRSS *tableView;
+
+-(id)initwithurl:(NSString*)CurrentUrl;
+-(void)finishParser;
+-(void)InBrowser:(NSIndexPath *)indexPath;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomCell : UITableViewCell
+@interface CustomCell : UITableViewCell <UITextViewDelegate>
 {
     UILabel *title;
     UILabel *pubData;

@@ -9,5 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface ParserData : NSObject
+{ @private    
+    NSMutableArray *feedTitle;
+    NSMutableArray *feedPubDate;
+    NSMutableArray *feedURL;
+    NSMutableArray *feedDescription;
+}
+@property(nonatomic,retain) NSMutableArray *feedDescription;
+@property(nonatomic,retain) NSMutableArray *feedTitle;
+@property(nonatomic,retain) NSMutableArray *feedPubDate;
+@property(nonatomic,retain) NSMutableArray *feedURL;
+
+-(id)init;
 
 @end

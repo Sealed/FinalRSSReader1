@@ -9,23 +9,54 @@
 #import "CDownloader.h"
 
 @implementation CDownloader
+@synthesize rssData;
+@synthesize delegate;
+@synthesize url;
+@synthesize theRequest;
+@synthesize theConnection;
 
-- (id)initWithFrame:(CGRect)frame
+-(id)initwithurl:(NSString *)TextURL;
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];    
+    self.url = [NSURL URLWithString:TextURL];
+    self.theRequest=[NSURLRequest requestWithURL:url
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                          timeoutInterval:60.0];
+    
+    self.theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    if (theConnection) {
+        self.rssData = [NSMutableData data];
+    } else {
+        NSLog(@"Connection failed");
+    }      
+   
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [rssData appendData:data];
 }
-*/
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    SEL selector = @selector(start);
+	if (delegate && [delegate respondsToSelector:selector]) {
+		[delegate performSelector:selector];
+	}
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"%@", error);
+}
+- (void)dealloc
+{
+    [rssData release];
+    [delegate release];
+    [url release];
+    [theRequest release];
+    [theConnection release];
+    [super dealloc];
+}
+
+
 
 @end
